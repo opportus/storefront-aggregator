@@ -11,22 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author  Clément Cazaud <opportus@gmail.com>
  */
 
-add_action( 'storefront_aggregator_integration', 'storefront_aggregator_wc_integration', 10, 0 );
+// Backend.
+add_filter( 'storefront_aggregator_meta_boxes',    'storefront_aggregator_wc_meta_boxes',       10, 1 );
 
-/**
- * WooCommerce integration.
- */
-function storefront_aggregator_wc_integration() {
-
-	// Backend.
-	add_filter( 'storefront_aggregator_meta_boxes',    'storefront_aggregator_wc_meta_boxes',       10, 1 );
-
-	// Frontend
-	add_action( 'wp_enqueue_scripts',                  'storefront_aggregator_wc_register_scripts', 30, 0 );
-	add_filter( 'storefront_aggregator_query_items',   'storefront_aggregator_wc_query_items',      20, 2 );
-	add_action( 'storefront_aggregator_item_template', 'storefront_aggregator_wc_item_template',    20, 2 );
-}
-
+// Frontend
+add_filter( 'storefront_aggregator_query_items',   'storefront_aggregator_wc_query_items',      20, 2 );
+add_action( 'storefront_aggregator_item_template', 'storefront_aggregator_wc_item_template',    20, 2 );
+add_action( 'wp_enqueue_scripts',                  'storefront_aggregator_wc_register_scripts', 30, 0 );
+	
 /**
  * WooCommerce meta boxes.
  *

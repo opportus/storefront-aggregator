@@ -71,8 +71,6 @@ function storefront_aggregator_integration() {
 	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 		require_once( plugin_dir_path( __FILE__ ) . '/integration/woocommerce/woocommerce.php' );
 	}
-
-	do_action( 'storefront_aggregator_integration' );
 }
 
 /*

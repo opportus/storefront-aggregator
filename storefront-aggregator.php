@@ -3,19 +3,19 @@
 /**
  * Plugin Name: Storefront Aggregator
  * Plugin URI: https://github.com/opportus/storefront-aggregator/
- * Description: Multi Item Aggregator for Storefront. Improves user experience and adds dynamic content to your pages.
- * Version: 0.1
  * Author: Clément Cazaud
  * Author URI: https://github.com/opportus/
  * Licence: MIT Licence
  * Licence URI: https://opensource.org/licenses/MIT
+ * Description: Item Aggregator for Storefront. Improves user experience and adds dynamic content to your pages.
+ * Version: 0.1
  * Requires at least: 4.4
  * Tested up to 4.6
  * Text Domain: storefront-aggregator
  *
  * NOTES
- * The design guideline is simplicity, flexibility and extensivity.
- * This plugin allows seamless integration of aggregate custom items with the help of 3 hooks:
+ * The design guideline is simplicity > flexibility > extensibility
+ * This plugin allows seamless and simple integration of aggregate custom items with the help of just 3 hooks:
  * `storefront_aggregator_meta_boxes` - `storefront_aggregator_query_items` - `storefront_aggregator_item_template`.
  * See `integration/woocommerce/` for more details.
  *
@@ -783,6 +783,8 @@ function storefront_aggregator_customizer_settings() {
 
 /**
  * Customizer preview script.
+ *
+ * Hooked into `wp_footer` action hook.
  */
 function storefront_aggregator_customizer_preview_script() {
 	foreach ( storefront_aggregator_customizer_settings() as $id => $setting ) {
@@ -804,6 +806,8 @@ function storefront_aggregator_customizer_preview_script() {
 
 /**
  * Action links.
+ * 
+ * Hooked into `plugin_action_links_${plugin_file_name}` action hook.
  *
  * @param  array $links
  * @return array $links

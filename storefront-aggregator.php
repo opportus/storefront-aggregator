@@ -7,17 +7,24 @@
  * Author URI: https://github.com/opportus/
  * Licence: MIT Licence
  * Licence URI: https://opensource.org/licenses/MIT
- * Description: Item Aggregator for Storefront. Improves user experience and adds dynamic content to your pages.
+ * Description: Content Aggregator for Storefront. Improves user experience and adds dynamic content to your pages.
  * Version: 0.1
  * Requires at least: 4.4
  * Tested up to 4.6
  * Text Domain: storefront-aggregator
  *
- * NOTES
+ * NOTES:
+ *
  * The design guideline is simplicity > flexibility > extensibility
+ * 
  * This plugin allows seamless and simple integration of aggregate custom items with the help of just 3 hooks:
  * `storefront_aggregator_meta_boxes` - `storefront_aggregator_query_items` - `storefront_aggregator_item_template`.
  * See `integration/woocommerce/` for more details.
+ *
+ * This file is divided in 3 sections:
+ * 1. Initialization
+ * 2. Frontend
+ * 3. Backend
  *
  * @version 0.1
  * @author  Clément Cazaud <opportus@gmail.com>
@@ -27,9 +34,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-storefront_aggregator_define_constants();
-storefront_aggregator_add_hooks();
-storefront_aggregator_integration();
+/*
+ |-------------------------------------------------------------------
+ | Initialization Section
+ |-------------------------------------------------------------------
+ */
+
+storefront_aggregator();
+
+/**
+ * Initializes the plugin.
+ *
+ * @return void
+ */
+function storefront_aggregator() {
+	$theme = wp_get_theme();
+
+	// Checks if we have Storefront or its child theme activated.
+	if ( 'Storefront' != $theme->name && 'storefront' != $theme->template ) {
+		add_action( 'admin_notices', 'storefront_aggregator_admin_notices_theme_not_awoosome' );
+
+		return;
+	}
+
+	storefront_aggregator_define_constants();
+	storefront_aggregator_add_hooks();
+	storefront_aggregator_integration();
+}
 
 /**
  * Defines constants. 
@@ -77,7 +108,6 @@ function storefront_aggregator_integration() {
  |-------------------------------------------------------------------
  | Frontend Section
  |-------------------------------------------------------------------
- |
  */
 
 /**
@@ -264,7 +294,6 @@ function storefront_aggregator_customizer_style() {
  |-------------------------------------------------------------------
  | Backend Section
  |-------------------------------------------------------------------
- |
  */
 
 /**
@@ -817,4 +846,17 @@ function storefront_aggregator_action_links( $links ) {
 	);
 
 	return $links += $my_links;
+}
+
+/**
+ * Admin notice for unawoosomeness.
+ *
+ * Hooked into `admin_notices` action hook.
+ */
+function storefront_aggregator_admin_notices_theme_not_awoosome() {
+	$aggregator        = '<strong>Storefront Aggregator</strong>';
+	$deactivation_link = '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '" target="_blank">' . __( 'deactivate', 'storefront-aggregator' ) . '</a>';
+	$storefront_link   = '<a href="https://wordpress.org/themes/storefront/" target="_blank">Storefront</a>';
+
+	echo '<div class="notice error"><p>' . sprintf( esc_html__( 'Your theme is not awoosome ! %1$s is compatible only with... Storefront. Please, %2$s the plugin or switch to %3$s !', 'storefront-aggregator' ), $aggregator, $deactivation_link, $storefront_link ) . '</p></div>';
 }

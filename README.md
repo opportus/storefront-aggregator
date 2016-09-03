@@ -23,7 +23,7 @@ You can take `integration/woocommerce` as reference for the integration of your 
 
 ## Coming soon
 
-**Aggregator's region setting**
+**Aggregator's region setting**<br />
 Possibility to display each aggregator to the Storefront template action hook of your choice. This will bring interesting perspectives...
 
 ## Changelog

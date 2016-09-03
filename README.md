@@ -1,30 +1,34 @@
 # Storefront Aggregator
 
-A Multi Item Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
+A content Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
 
 ## Description
 
-The aggregator is registered as a custom post type - Edit and manipulate it as such.<br />
-You can attach to aggregators a desired amount of items and choose on which pages to display each aggregator. It is possible to display multiple aggregators on a single page.<br />
-By default, the available items types are 'Last Posts' and 'Last Comments'. Compatible with WooCommerce, you also can aggregate 'Last Products' or 'Last Reviews'.<br />
+The aggregators are registered as custom post type - Edit and manipulate them as such.<br />
+You can attach to aggregators the desired amount of items and choose on which pages to display each aggregator. It is possible to display multiple aggregators on a single page.<br />
+By default, the available item types are 'Last Posts' and 'Last Comments'. Compatible with WooCommerce, you also can aggregate 'Last Products' or 'Last Reviews'.<br />
 The aggregate items are slidable and fully responsive. Thanks to FlexSlider.<br />
-Dedicated Customizer section from which you can switch color of all aggregator's elements.
+Features a dedicated Customizer section from which you can switch color of all aggregator's elements.
 
 ## Extensibility
 
-For devs, it allows seamless integration of **any** imaginable custom items. Just some examples:
-- Most popular products.
-- Best reviews.
-- Last orders and/or last order notes on the account page.
+For devs, it allows seamless integration of **any** imaginable custom items. Just few examples:
+- Last orders and/or last order notes on WooCommerce account page.
+- Category items.
 - RSS feeds.
 - Etc... The possibilities are endless.
 
 All this is possible with the help of 2 filter hooks - `storefront_aggregator_meta_boxes` -  `storefront_aggregator_query_items` and 1 action hook - `storefront_aggregator_item_template`.<br />
 You can take `integration/woocommerce` as reference for the integration of your custom items.
 
+## Coming soon
+
+**Aggregator's region setting**
+Possibility to display each aggregator to the Storefront template action hook of your choice. This will bring interesting perspectives...
+
 ## Changelog
 
-**0.1 - 01/09/2016**
+**v0.1 - 01/09/2016**
 - Beta Release
 
 ## Licence

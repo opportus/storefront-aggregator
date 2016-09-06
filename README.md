@@ -1,6 +1,6 @@
 # Storefront Aggregator
 
-A content Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
+An extremely flexible and extensible content Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
 
 ## Description
 
@@ -9,6 +9,10 @@ You can attach to aggregators the desired amount of items and choose on which pa
 By default, the available item types are 'Last Posts' and 'Last Comments'. Compatible with WooCommerce, you also can aggregate 'Last Products' or 'Last Reviews'.<br />
 The aggregate items are slidable and fully responsive. Thanks to FlexSlider.<br />
 Features a dedicated Customizer section from which you can switch color of all aggregator's elements.
+
+**Coming soon**
+- Possibility to display each aggregator to the page and its template action hook of YOUR choice. This will bring interesting perspectives...
+- Dynamically generated Customizer settings for **each** Aggregator including different choice of layouts and further styles.
 
 ## Extensibility
 
@@ -20,11 +24,6 @@ For devs, it allows seamless integration of **any** imaginable custom items. Jus
 
 All this is possible with the help of 2 filter hooks - `storefront_aggregator_meta_boxes` -  `storefront_aggregator_query_items` and 1 action hook - `storefront_aggregator_item_template`.<br />
 You can take `integration/woocommerce` as reference for the integration of your custom items.
-
-## Coming soon
-
-**Aggregator's region setting**<br />
-Possibility to display each aggregator to the Storefront template action hook of your choice. This will bring interesting perspectives...
 
 ## Changelog
 

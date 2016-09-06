@@ -1,6 +1,6 @@
 # Storefront Aggregator
 
-An extremely flexible and extensible content Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
+A flexible and extensible content Aggregator for Storefront... Improves user experience and adds dynamic content to your pages.
 
 ## Description
 

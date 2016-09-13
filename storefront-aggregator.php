@@ -86,20 +86,19 @@ final class Storefront_Aggregator {
 	 * Hooked into `init` action hook.
 	 */
 	public function init_hooks() {
-		add_action( 'init',                 array( $this, 'init_constants' ),   10, 0 );
-		add_action( 'init',                 array( $this, 'init_integration' ), 20, 0 );
-		add_action( 'init',                 array( $this, 'init_aggregators' ), 30, 0 );
+		add_action( 'init', array( $this, 'init_constants' ),   10, 0 );
+		add_action( 'init', array( $this, 'init_integration' ), 20, 0 );
+		add_action( 'init', array( $this, 'init_aggregators' ), 30, 0 );
 
 		if ( is_admin() ) {
 			if ( current_user_can( 'edit_posts' ) ) {
-				add_action( 'init',             array( $this, 'init_admin' ),       40, 0 );
+				add_action( 'init', array( $this, 'init_admin' ), 40, 0 );
 			}
-
 		} else {
-			add_action( 'template_redirect',  array( $this, 'init_frontend' ),    10, 0 );
+			add_action( 'template_redirect', array( $this, 'init_frontend' ), 10, 0 );
 		}
 
-		add_action( 'customize_register',   array( $this, 'init_customizer' ),  10, 1 );
+		add_action( 'customize_register', array( $this, 'init_customizer' ), 10, 1 );
 	}
 
 	/**
@@ -133,7 +132,11 @@ final class Storefront_Aggregator {
 	 * Hooked into `init` action hook.
 	 */
 	public function init_aggregators() {
+
+		// Aggregator objects generated below are stored into a transient. This transient is deleted on `save_post` action hook.
 		if ( false === $aggregators = get_transient( 'storefront_aggregators' ) ) {
+
+			// Picks up Aggregators.
 			$query_args = array(
 				'post_type'   => 'ultimate_aggregator',
 				'post_status' => 'publish',
@@ -150,19 +153,22 @@ final class Storefront_Aggregator {
 				),
 			);
 
-			$query_args = apply_filters( 'storefront_aggregator_query_args', $query_args, 'aggregator' );
+			$query_args = apply_filters( 'storefront_aggregator_query_args', $query_args );
 			$query      = new WP_Query( $query_args );
 			$posts      = $query->get_posts();
 
 			foreach ( $posts as $aggregator ) {
-				$unserializable_meta_keys = (array) apply_filters( 'storefront_aggregator_unserializable_meta_keys', array( 'storefront_aggregator_domain' ) );
+
+				// Picks up Aggregator meta once and for all... This will avoid further queries.
+				$unserializable_meta = (array) apply_filters( 'storefront_aggregator_unserializable_meta', array( 'storefront_aggregator_domain' ) );
 
 				foreach ( get_post_meta( $aggregator->ID ) as $key => $array ) {
 					foreach ( $array as $value ) {
-						$meta[ substr( $key, 22 ) ] = in_array( $key, $unserializable_meta_keys ) ? unserialize( $value ) : $value;
+						$meta[ substr( $key, 22 ) ] = in_array( $key, $unserializable_meta ) ? unserialize( $value ) : $value;
 					}
 				}
 
+				// Picks up Aggregator's Items.
 				$items = array();
 				
 				switch ( $meta['items_type'] ) {
@@ -187,8 +193,8 @@ final class Storefront_Aggregator {
 
 				$items = (array) apply_filters( 'storefront_aggregator_items', $items, $meta );
 
-				$aggregator->{ 'meta' }  = $meta;
-				$aggregator->{ 'items' } = $items;
+				$aggregator->{ 'meta' }  = $meta;  // Defines `meta` Aggregator's property.
+				$aggregator->{ 'items' } = $items; // Defines `items` Aggregator's property.
 
 				$aggregators[ $aggregator->ID ] = $aggregator;
 			}
@@ -260,7 +266,9 @@ final class Storefront_Aggregator {
 }
 
 /**
- * Storefront Aggegator function for avoiding the use of globals.
+ * Storefront Aggegator function.
+ *
+ * Avoids the use of global..
  *
  * @return object Plugin Instance
  */

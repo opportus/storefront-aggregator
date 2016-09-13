@@ -58,8 +58,8 @@ class Storefront_Aggregator_Admin {
 		
 		add_action( 'init',                                               array( $this, 'register_post_type' ),  50, 0 );
 		add_action( 'save_post_ultimate_aggregator',                      array( $this, 'save_meta_boxes' ),     10, 2 );
-		add_action( 'post_submitbox_misc_actions',                        array( $this, 'customize_button' ),    10, 0 );
 		add_action( 'trashed_post',                                       array( $this, 'trashed_post' ),        10, 1 );
+		add_action( 'post_submitbox_misc_actions',                        array( $this, 'customize_button' ),    10, 0 );
 		add_filter( 'manage_ultimate_aggregator_posts_columns',           array( $this, 'posts_columns' ),       10, 0 );
 		add_filter( 'manage_ultimate_aggregator_posts_custom_column',     array( $this, 'posts_custom_column' ), 10, 2 );
 		add_filter( 'is_protected_meta',                                  array( $this, 'protect_meta' ),        10, 2 );
@@ -223,75 +223,48 @@ class Storefront_Aggregator_Admin {
 
 				$html .= '</select>';
 
-				echo $html;
-
-				wp_nonce_field( $nonce_action, $nonce_name );
-
 			break;
 
 			case 'storefront_aggregator_items_number_meta_box':
 				$html  = '<p class="description">' . esc_html__( 'How many items do you want to aggregate ?', 'storefront-aggregator' ) . '</p>';
-				$html .= '<input id="' . esc_attr( $meta_key ) . '" name="' . esc_attr( $meta_key ) . '" type="number" value="' . esc_attr( $value ) . '" />';
-
-				echo $html;
-
-				wp_nonce_field( $nonce_action, $nonce_name );
+				$html .= '<input id="' . esc_attr( $meta_key ) . '" name="' . esc_attr( $meta_key ) . '" type="number" min="1" max="20" value="' . esc_attr( $value ) . '" />';
 
 			break;
 
 			case 'storefront_aggregator_domain_meta_box':
-				$label_1 = '<strong>' . esc_html__( 'Page' ) . '</strong>';
-				$label_2 = '<strong>' . esc_html__( 'Hook' ) . '</strong>';
-				$label_3 = '<strong>' . esc_html__( 'Priority' ) . '</strong>';
+				$label_1 = '<strong>' . esc_html__( 'Page', 'storefront-aggregator' ) . '</strong>';
+				$label_2 = '<strong>' . esc_html__( 'Hook', 'storefront-aggregator' ) . '</strong>';
+				$label_3 = '<strong>' . esc_html__( 'Priority', 'storefront-aggregator' ) . '</strong>';
 				$link_1  = '<a href="https://codex.wordpress.org/Conditional_Tags" target="_blank">' . esc_html__( 'Codex references', 'storefront-aggregator' ) . '</a>';
 
 				$html  = '<p class="description">' . esc_html__( 'Where do you want to show this aggregator ?', 'storefront-aggregator' ) . '</p><br />';
-				$html .= '<p class="description">' . sprintf( esc_html__( '%1$s: Takes the form of a conditional tag. %2$s.' ), $label_1, $link_1 ) . '</p>';
-				$html .= '<p class="description">' . sprintf( esc_html__( '%s: A template action hook that must be present on the page.' ), $label_2 ) . '</p>';
-				$html .= '<p class="description">' . sprintf( esc_html__( '%s: The action hook priority. Useful if you want this aggregator to move around other elements hooked to the same action.' ), $label_3 ) . '</p><br />';
+				$html .= '<p class="description">' . sprintf( esc_html__( '%1$s: Takes the form of a conditional tag... %2$s.', 'storefront-aggregator' ), $label_1, $link_1 ) . '</p>';
+				$html .= '<p class="description">' . sprintf( esc_html__( '%s: A template action hook that must be present on the page.', 'storefront-aggregator' ), $label_2 ) . '</p>';
+				$html .= '<p class="description">' . sprintf( esc_html__( '%s: The action hook priority. Useful if you want this aggregator to move around other elements hooked to the same action.', 'storefront-aggregator' ), $label_3 ) . '</p><br />';
 				$html .= '<div id="postcustomstuff">';
 			
 				$html .= '<table class="form-table">';
 				$html .= '<tr><td>';
 				$html .= '<label for="' . esc_attr( $meta_key . '_page' ) . '">' . $label_1 . '</label>';
 				$html .= '</td><td>';
-				$html .= '<input id="' . esc_attr( $meta_key . '_page' ) . '" name="' . esc_attr( $meta_key . '[page]' ) . '" type="text" value="' . esc_attr( $value['page'] ) . '">';
+				$html .= '<input id="' . esc_attr( $meta_key . '_page' ) . '" name="' . esc_attr( $meta_key . '[page]' ) . '" type="text" maxlength="50" value="' . esc_attr( $value['page'] ) . '">';
 				$html .= '</td></tr><tr><td>';
 				$html .= '<label for="' . esc_attr( $meta_key . '_hook' ) . '">' . $label_2 . '</label>';
 				$html .= '</td><td>';
-				$html .= '<input id="' . esc_attr( $meta_key . '_hook' ) . '" name="' . esc_attr( $meta_key . '[hook]' ) . '" type="text" max="20" value="' . esc_attr( $value['hook'] ) . '">';
+				$html .= '<input id="' . esc_attr( $meta_key . '_hook' ) . '" name="' . esc_attr( $meta_key . '[hook]' ) . '" type="text" maxlength="50" value="' . esc_attr( $value['hook'] ) . '">';
 				$html .= '</td></tr><tr><td>';
 				$html .= '<label for="' . esc_attr( $meta_key . '_priority' ) . '">' . $label_3 . '</label>';
 				$html .= '</td><td>';
-				$html .= '<input id="' . esc_attr( $meta_key . '_priority' ) . '" name="' . esc_attr( $meta_key . '[priority]' ) . '" type="number" max="1000"  value="' . esc_attr( $meta_default['priority'] ) . '">';
+				$html .= '<input id="' . esc_attr( $meta_key . '_priority' ) . '" name="' . esc_attr( $meta_key . '[priority]' ) . '" type="number" max="999" value="' . esc_attr( $value['priority'] ) . '">';
 				$html .= '</td></tr>';
 				$html .= '</table>';
 
-				echo $html;
-
-				wp_nonce_field( $nonce_action, $nonce_name );
-
 			break;
 		}
-	}
 
-	public function customize_button() {
-		global $post;
-		
-		if ( 'ultimate_aggregator' === $post->post_type && 'publish' === $post->post_status ) {
-			$query = array(
-				'autofocus[section]' => 'storefront_aggregator_customizer_' . $post->ID,
-			);
+		echo $html;
 
-			$url = add_query_arg( $query, admin_url( 'customize.php' ) );
-
-			$html  = '<div id="major-publishing-actions" style="overflow:hidden">';
-			$html .= '<div id="publishing-action">';
-			$html .= '<a class="button button-primary" href="' . esc_url( $url ) . '">' . esc_html__( 'Customize this aggregator', 'storefront-aggregator' ) . '</a>';
-			$html .= '</div>';
-			$html .= '</div>';
-			echo $html;
-		}
+		wp_nonce_field( $nonce_action, $nonce_name );
 	}
 
 	/**
@@ -318,7 +291,7 @@ class Storefront_Aggregator_Admin {
 				$meta_value = $this->_sanitize_meta( $meta_value );
 				$meta_key   = sanitize_key( $meta_key );
 
-				if ( ! empty( $meta_value ) ) {
+				if ( '' !== $meta_value ) {
 					update_post_meta( $post_id, $meta_key, $meta_value );
 
 					delete_transient( 'storefront_aggregators' );
@@ -339,48 +312,37 @@ class Storefront_Aggregator_Admin {
 			return preg_match( '#^[a-z_]{1,20}$#', $meta_value ) ? $meta_value : '';
 
 		} elseif ( 'storefront_aggregator_items_number' === $meta_key ) {
-			return ! empty( $meta_value ) && intval( $meta_value ) < 20 ? $meta_value : '';
+			return ! empty( $meta_value ) && preg_match( '#^[1-9]{1}$|^1[0-9]{1}$|^20$#', $meta_value ) ? $meta_value : '';
 
 		} elseif ( 'storefront_aggregator_domain' === $meta_key ) {
 			if ( is_array( $meta_value ) ) {
 				foreach ( $meta_value as $key => $value ) {
-					if ( 'page' === $key || 'hook' === $key ) {
-						if ( preg_match( '#^[a-z_]{1,50}$#', $value ) ) {
-							$meta_value_array[ $key ] = $value;
-						} else {
-							return '';
-						}
-					} elseif ( 'priority' === $key ) {
-						if ( ! empty( $value ) && intval( $value ) < 1000 ) {
-							$meta_value_array[ $key ] = $value;
-						} else {
-							return '';
-						}
+					if ( ( 'page' === $key || 'hook' === $key ) && preg_match( '#^[a-z_]{1,50}$#', $value ) ) {
+						$meta_value_array[ $key ] = $value;
+					} elseif ( 'priority' === $key && preg_match( '#^[1-9]{1}[0-9]{0,1}[0-9]{0,1}$|^0{1}$#', $value ) ) {
+						$meta_value_array[ $key ] = $value;
 					}
 				}
 
-				return isset( $meta_value_array ) ? $meta_value_array : '';
-
-			} else {
-				return '';
+				return isset( $meta_value_array ) && count( $meta_value_array ) === 3 ? $meta_value_array : '';
 			}
-		} else {
-			return '';
 		}
+
+		return '';
 	}
 
 	/**
 	 * Sanitizes meta.
 	 *
-	 * @param  array|string $meta
+	 * @param  array|string $meta_value
 	 * @return array|string $sanitized_meta
 	 */
-	private function _sanitize_meta( $meta ) {
-		if ( is_array( $meta ) && ! empty( $meta ) ) {	
-			foreach ( $meta as $key => $value ) {
+	private function _sanitize_meta( $meta_value ) {
+		if ( is_array( $meta_value ) && '' !== $meta_value ) {
+			foreach ( $meta_value as $key => $value ) {
 				$sanitized_value = $this->_sanitize_meta( $value );
 
-				if ( ! empty( $sanitized_value ) ) {
+				if ( '' !== $sanitized_value ) {
 					$sanitized_meta[ sanitize_key( $key ) ] = $sanitized_value;
 				}
 			}	
@@ -388,13 +350,38 @@ class Storefront_Aggregator_Admin {
 			if ( ! isset( $sanitized_meta ) ) {
 				$sanitized_meta = '';
 			}
-		} elseif ( is_string( $meta ) && ! empty( $meta ) ) {
-			$sanitized_meta = sanitize_text_field( $meta );
+		} elseif ( is_string( $meta_value ) && '' !== $meta_value ) {
+			$sanitized_meta = sanitize_text_field( $meta_value );
 		} else {
 			$sanitized_meta = '';
 		}
 
 		return $sanitized_meta;
+	}
+
+	/**
+	 * Customize button.
+	 *
+	 * Hooked into `post_submitbox_misc_actions` action hook.
+	 */
+	public function customize_button() {
+		global $post;
+
+		if ( 'ultimate_aggregator' === $post->post_type && 'publish' === $post->post_status ) {
+			$query = array(
+				'autofocus[section]' => 'storefront_aggregator_customizer_' . $post->ID,
+			);
+
+			$url = add_query_arg( $query, admin_url( 'customize.php' ) );
+
+			$html  = '<div id="major-publishing-actions" style="overflow:hidden">';
+			$html .= '<div id="publishing-action">';
+			$html .= '<a class="button button-primary" href="' . esc_url( $url ) . '">' . esc_html__( 'Customize this aggregator', 'storefront-aggregator' ) . '</a>';
+			$html .= '</div>';
+			$html .= '</div>';
+
+			echo $html;
+		}
 	}
 
 	/**
@@ -456,6 +443,19 @@ class Storefront_Aggregator_Admin {
 	}
 
 	/**
+	 * Trashed post actions.
+	 *
+	 * Hooked into `trashed_post` action hook.
+	 *
+	 * @param int $post_id
+	 */
+	public function trashed_post( $post_id ) {
+		if ( 'ultimate_aggregator' === get_post_type( $post_id ) ) {
+			delete_option( 'storefront_aggregator_customizer_' . $post_id );
+		}
+	}
+
+	/**
 	 * Protects meta.
 	 *
 	 * Hooked into `is_protected_meta` action hook.
@@ -500,18 +500,5 @@ class Storefront_Aggregator_Admin {
 		);
 
 		return $links += $my_links;
-	}
-
-	/**
-	 * Trashed post actions.
-	 *
-	 * Hooked into `trashed_post` action hook.
-	 *
-	 * @param int $post_id
-	 */
-	public function trashed_post( $post_id ) {
-		if ( 'ultimate_aggregator' === get_post_type( $post_id ) ) {
-			delete_option( 'storefront_aggregator_customizer_' . $post_id );
-		}
 	}
 }

@@ -49,11 +49,11 @@ class Storefront_Aggregator_Integration_WooCommerce {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_filter( 'storefront_aggregator_items',            array( $this, 'items' ),          20, 2 );
+		add_filter( 'storefront_aggregator_items', array( $this, 'items' ), 10, 2 );
 
 		if ( is_admin() ) {
 			if ( current_user_can( 'edit_posts' ) ) {
-				add_filter( 'storefront_aggregator_meta_boxes',   array( $this, 'meta_boxes' ),     10, 1 );
+				add_filter( 'storefront_aggregator_meta_boxes', array( $this, 'meta_boxes' ), 10, 1 );
 			}
 		} else {
 			add_action( 'storefront_aggregator_items_template', array( $this, 'items_template' ), 20, 3 );

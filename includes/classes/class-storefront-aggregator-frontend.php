@@ -52,9 +52,9 @@ class Storefront_Aggregator_Frontend {
 		$this->_aggregator = $aggregator;
 		
 		add_action( $this->_aggregator->meta['domain']['hook'], array( $this, 'output' ), $this->_aggregator->meta['domain']['priority'] );
-		add_action( 'wp_enqueue_scripts',                       array( $this, 'add_styles' ),                                  20, 0 );
-		add_action( 'storefront_aggregator_template',           array( 'Storefront_Aggregator_Frontend', 'template' ),         10, 1 );
-		add_action( 'storefront_aggregator_items_template',     array( 'Storefront_Aggregator_Frontend', 'items_template' ),   10, 3 );
+		add_action( 'wp_enqueue_scripts',                       array( $this, 'add_styles' ),                                20, 0 );
+		add_action( 'storefront_aggregator_template',           array( 'Storefront_Aggregator_Frontend', 'template' ),       10, 1 );
+		add_action( 'storefront_aggregator_items_template',     array( 'Storefront_Aggregator_Frontend', 'items_template' ), 10, 3 );
 
 		if ( self::$_instance_count === 1 ) {
 			add_action( 'wp_enqueue_scripts', array( 'Storefront_Aggregator_Frontend', 'enqueue_scripts' ), 10, 0 );

@@ -47,7 +47,12 @@
 	border: none;
 }
 .flex-direction-nav a:before {
+  font-family: 'FontAwesome';
+  content: '\f053';
   font-size: 30px;
+}
+.flex-direction-nav a.flex-next:before {
+  content: '\f054';
 }
 .flex-control-nav {
 	display: none;

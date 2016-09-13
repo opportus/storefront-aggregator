@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Review template.
  *
- * @version 0.1
+ * @version 0.2
  * @author  Clément Cazaud <opportus@gmail.com>
  */
 
@@ -32,7 +32,7 @@ $rating   = intval( get_comment_meta( $item->comment_ID, 'rating', true ) ); ?>
 		<p class="storefront-aggregator__item__author"><?php echo esc_html( $author ); ?></p>
 
 		<?php if ( $rating && 'no' !== get_option( 'woocommerce_enable_review_rating' ) ): ?>
-			<p class="storefront-aggregator__item__rating  star-rating" title="<?php echo  esc_attr( sprintf( __( 'Rated %s out of 5', 'woocommerce' ), $rating ) ); ?>">
+			<p class="storefront-aggregator__item__rating  star-rating" title="<?php echo  esc_attr( sprintf( __( 'Rated %s out of 5', 'woocommerce' ), $rating ) ); ?>" style="margin: 0 auto 1em">
 				<span style="width:<?php echo ( $rating / 5 ) * 100; ?>%">
 					<strong class="rating"><?php echo esc_html( $rating ); ?></strong> <?php  _e( 'out of 5', 'woocommerce' ); ?>
 				</span>

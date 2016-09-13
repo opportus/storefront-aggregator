@@ -7,16 +7,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Aggregator template.
  *
- * @version 0.1
+ * @version 0.2
  * @author  Clément Cazaud <opportus@gmail.com>
  */
 
-$title    = apply_filters( 'the_title',   $aggregator->post_title );
-$content  = apply_filters( 'the_content', $aggregator->post_content );
+$title   = apply_filters( 'the_title',   $aggregator->post_title );
+$content = apply_filters( 'the_content', $aggregator->post_content );
 
 do_action( 'storefront_aggregator_before' ); ?>
 
-<section class="storefront-aggregator" aria-label="<?php echo esc_attr__( 'Aggregator', 'storefront-aggregator' ); ?>">
+<section id="storefront-aggregator-<?php echo esc_attr( strval( $aggregator->ID ) ) ?>" class="storefront-aggregator" aria-label="<?php echo esc_attr__( 'Aggregator', 'storefront-aggregator' ); ?>">
 	<div class="col-full">
 
 		<?php do_action( 'storefront_aggregator_top' ); ?>
@@ -40,12 +40,12 @@ do_action( 'storefront_aggregator_before' ); ?>
 		<div class="flexslider">
 			<ul class="storefront-aggregator__items">
 
-				<?php foreach ( $items as $key => $item ) {
+				<?php foreach ( $aggregator->items as $item_count => $item ) {
 
 					/**
-					 * Hooked `storefront_aggregator_item_template( $item, $meta )` - 10
+					 * Hooked `storefront_aggregator_items_template()` - 10
 					 */
-					do_action( 'storefront_aggregator_item_template', $item, $meta, $key );
+					do_action( 'storefront_aggregator_items_template', $item, $aggregator, $item_count );
 				} ?>
 
 			</ul>

@@ -3,7 +3,7 @@
 /**
  * Storefront Aggregator uninstall script.
  *
- * @version 0.1
+ * @version 0.2
  * @author  Clément Cazaud <opportus@gmail.com>
  */
 

@@ -452,6 +452,7 @@ class Storefront_Aggregator_Admin {
 	public function trashed_post( $post_id ) {
 		if ( 'ultimate_aggregator' === get_post_type( $post_id ) ) {
 			delete_option( 'storefront_aggregator_customizer_' . $post_id );
+			delete_transient( 'storefront_aggregators' );
 		}
 	}
 

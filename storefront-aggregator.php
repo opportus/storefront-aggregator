@@ -87,8 +87,8 @@ final class Storefront_Aggregator {
 	 */
 	public function init_hooks() {
 		add_action( 'init', array( $this, 'init_constants' ),   10, 0 );
-		add_action( 'init', array( $this, 'init_integration' ), 20, 0 );
-		add_action( 'init', array( $this, 'init_aggregators' ), 30, 0 );
+		add_action( 'init', array( $this, 'init_aggregators' ), 20, 0 );
+		add_action( 'init', array( $this, 'init_integration' ), 30, 0 );
 
 		if ( is_admin() ) {
 			if ( current_user_can( 'edit_posts' ) ) {

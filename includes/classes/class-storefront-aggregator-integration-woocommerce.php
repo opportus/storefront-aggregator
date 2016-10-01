@@ -103,6 +103,7 @@ class Storefront_Aggregator_Integration_WooCommerce {
 			case 'product':
 				$args = array(
 					'post_type'      => 'product',
+					'post_status'    => 'publish',
 					'posts_per_page' => $meta['items_number'],
 				);
 
@@ -114,6 +115,7 @@ class Storefront_Aggregator_Integration_WooCommerce {
 			case 'review':
 				$args = array(
 					'number'    => $meta['items_number'],
+					'status'    => 'approved',
 					'post_type' => 'product',
 				);
 

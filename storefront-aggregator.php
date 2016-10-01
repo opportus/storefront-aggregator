@@ -175,6 +175,7 @@ final class Storefront_Aggregator {
 					case 'post':
 						$args = array(
 							'post_type'      => 'post',
+							'post_status'    => 'publish',
 							'posts_per_page' => $meta['items_number'],
 						);
 						$items_query = new WP_Query( $args );
@@ -184,6 +185,7 @@ final class Storefront_Aggregator {
 					case 'comment':
 						$args = array(
 							'post_type' => 'post',
+							'status'    => 'approved',
 							'number'    => $meta['items_number'],
 						);
 						$items_query = new WP_Comment_Query( $args );

@@ -115,7 +115,7 @@ class Storefront_Aggregator_Integration_WooCommerce {
 			case 'review':
 				$args = array(
 					'number'    => $meta['items_number'],
-					'status'    => 'approved',
+					'status'    => 'approve',
 					'post_type' => 'product',
 				);
 

@@ -185,7 +185,7 @@ final class Storefront_Aggregator {
 					case 'comment':
 						$args = array(
 							'post_type' => 'post',
-							'status'    => 'approved',
+							'status'    => 'approve',
 							'number'    => $meta['items_number'],
 						);
 						$items_query = new WP_Comment_Query( $args );

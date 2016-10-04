@@ -8,21 +8,35 @@ The aggregators are registered as custom post type - Edit and manipulate them as
 You can attach to aggregators the desired type and amount of items and choose on which pages and which template action hook to display each aggregator... It is possible to add multiple aggregators on a single page and/or on a single template hook.<br />
 By default, the available item types are 'Last Posts' and 'Last Comments'. Compatible with WooCommerce, you also can aggregate 'Last Products' or 'Last Reviews'.<br />
 The aggregate items are slidable and fully responsive. Thanks to FlexSlider.<br />
-Features a dedicated Customizer panel in which each aggregator can be deeply customized.
+Features a dedicated Customizer panel in which each aggregator can be deeply customized.<br />
 
-**Coming soon**
+## Focus
+
+The main points I've focused on are **extensibility** and **flexibility**.
+
+**Extensibility**
+
+At this stage, any tier developer can add his custom items to aggregate via 3 hooks:
+
+ - `aggregator_meta_boxes` filter from which we can add custom items types to be selected for aggregation.
+ - `aggregator_items` filter from which we can add the item objects themselves.
+ - `aggregator_items_template` action for hooking a custom item template easily enough inside the aggregator template.
+
+The custom item integration process could optionally get simplified via a little API.
+
+**Flexibility**
+
+From the setting page, you can display the aggregator via **any** template action hook of your choice. Of course to adapt its layout to every possible hooks, a Customize section is available for each aggregator. 
+
+## Coming soon
+
 - Improved Customizer... More user friendly interface and further styling options such as aggregator layout, margins, etc...
 
-## Extensibility
+## Ideas
 
-For devs, it allows seamless integration of **any** imaginable custom items. Just few examples:
-- Last orders and/or last order notes on WooCommerce account page.
-- Category items.
-- RSS feeds.
-- Etc... The possibilities are endless.
+Good or bad ideas. Feedbacks are welcome.
 
-This is possible by the help of 2 filter hooks - `storefront_aggregator_meta_boxes` -  `storefront_aggregator_items` and 1 action hook - `storefront_aggregator_item_template`.<br />
-You can take `includes/classes/class-storefront-aggregator-integration-woocommerce.php` as reference for the integration of your custom items.
+- Make aggregator's items editable and buildable directly by the end user via a setting subpage.
 
 ## Changelog
 

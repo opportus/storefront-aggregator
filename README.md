@@ -31,12 +31,93 @@ From the setting page, you can display the aggregator via **any** template actio
 ## Coming soon
 
 - Improved Customizer... More user friendly interface and further styling options such as aggregator layout, margins, etc...
+- **HOT**, "Edit Items" feature:
 
-## Ideas
+--------------------
+| Aggregators Menu |
+--------------------
+      |
+      -----------------------
+      | Aggregator CPT Menu |
+      -----------------------
+      |         |
+      |         | Add New Aggregator
+      |         |         |
+      |         ------------------------
+      |         | Edit Aggregator Page |
+      |         ------------------------
+      |                   |
+      |         __________|______________________________________________________________________
+      |        |                                                                                |
+      |        |  --------------------                                       ---------------    |
+      |        |  | Aggregator Title |                                       | Select Item |    |
+      |        |  --------------------                                       ---------------    |
+      |        |                                                                                |
+      |        |  ----------------------                                                        |
+      |        |  | Aggregator Content |                                                        |
+      |        |  ----------------------                                                        |
+      |        |                                                                                |
+      |        |  ---------------------                                                         |
+      |        |  | Aggregator Domain |                                                         |
+      |        |  ---------------------                                                         |
+      |        |            |                                                                   |
+      |        |            ---------------                                                     |
+      |        |            | Domain Page |                                                     |
+      |        |            ---------------                                                     |
+      |        |            |                                                                   |
+      |        |            ---------------                                                     |
+      |        |            | Domain Hook |                                                     |
+      |        |            ---------------                                                     |
+      |        |            |                                                                   |
+      |        |            ------------------------                                            |
+      |        |            | Domain Hook Priority |                                            |
+      |        |            ------------------------                                            |
+      |        |                                                                                |
+      |        __________________________________________________________________________________
+      |
+      -----------------
+      | Item CPT Menu |
+      -----------------
+                |
+                | Add New Item
+                |         |
+                ------------------
+                | Edit Item Page |
+                ------------------
+                          |
+                __________|______________________________________________________________________
+               |                                                                                |
+               | -----------------------------           -----------------------                |
+               | |       Item Template       |           |   Select Item Type  |                |
+               | |            or             |           -----------------------                |
+               | | Drag n Drop Item Elements |           |                     |                |
+               | -----------------------------           |                     |                |
+               |                                         |                     |                |
+               |                                         |  Scans for ALL CPTs |-- Post         |
+               |                                         |                     | |              |
+               |                                         |                     | -- Post        |
+               |                                         |                     | |              |
+               |                                         |                     | -- Page        |
+               |                                         |                     | |              |
+               |                                         |                     | -- Attachment  |
+               |                                         |                     | |              |
+               |                                         |                     | -- Product     |
+               | --------------------  Load on Selection |                     | |              |
+               | | Query Args Input |  <-----------------|                     | -- Etc...      |
+               | --------------------                    |                     |                |
+               |                                         |  Scans for ALL CCTs |-- Comment      |
+               |                                         |                     | |              |
+               |                                         |                     | -- Comment     |
+               |                                         |                     | |              |
+               |                                         |                     | -- Pingbacks   |
+               |                                         |                     | |              |
+               |                                         |                     | -- Trackbacks  |
+               |                                         |                     | |              |
+               |                                         |                     | -- Etc...      |
+               |                                         |                     |                |
+               |                                         |                     |-- User         |
+               __________________________________________________________________________________
 
-Good or bad ideas. Feedbacks are welcome.
-
-- Make aggregator's items editable and buildable directly by the end user via a setting subpage.
 
 ## Changelog
 
